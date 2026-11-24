@@ -1,0 +1,3002 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>Love you babe ♡</title>
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:"Trebuchet MS", Arial, sans-serif;
+
+    color:#6f6254;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            #fffdf7 0%,
+            #f8f0df 40%,
+            #eee2ca 72%,
+            #dfcfb1 100%
+        );
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+/* =====================================================
+   APP
+===================================================== */
+
+#app{
+    width:100%;
+    height:100%;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px 20px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transform:scale(.96);
+
+    transition:
+        opacity .6s ease,
+        transform .6s ease;
+
+    overflow:hidden;
+}
+
+.page.active{
+    opacity:1;
+
+    pointer-events:auto;
+
+    transform:scale(1);
+}
+
+
+/* =====================================================
+   PASSWORD SCREEN
+===================================================== */
+
+#passwordScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px 20px;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            #fffdf8 0%,
+            #f8f0df 45%,
+            #dfcfb1 100%
+        );
+
+    transition:
+        opacity .45s ease,
+        visibility .45s ease;
+}
+
+#passwordScreen.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+}
+
+
+.password-lock{
+
+    font-size:42px;
+
+    margin-bottom:8px;
+
+    animation:
+        passwordPulse
+        1.8s infinite;
+}
+
+@keyframes passwordPulse{
+
+    50%{
+        transform:scale(1.08);
+    }
+
+}
+
+
+.password-title{
+
+    margin-bottom:8px;
+
+    color:#806b50;
+
+    font-family:Georgia,serif;
+
+    font-size:31px;
+
+    text-align:center;
+}
+
+
+.password-subtitle{
+
+    margin-bottom:20px;
+
+    color:#766b5e;
+
+    font-size:12px;
+
+    text-align:center;
+
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   PASSWORD DOTS
+===================================================== */
+
+.password-dots{
+
+    display:flex;
+
+    gap:9px;
+
+    margin-bottom:12px;
+}
+
+.password-dot{
+
+    width:13px;
+
+    height:13px;
+
+    border-radius:50%;
+
+    border:2px solid #b6a083;
+
+    background:#fffdf8;
+
+    transition:.2s;
+}
+
+.password-dot.filled{
+
+    background:#8b7355;
+
+    border-color:#8b7355;
+
+    transform:scale(1.08);
+}
+
+
+.password-error{
+
+    min-height:18px;
+
+    margin-bottom:12px;
+
+    color:#9a6858;
+
+    font-size:11px;
+
+    text-align:center;
+}
+
+
+/* =====================================================
+   KEYPAD
+===================================================== */
+
+.keypad{
+
+    width:min(290px,90vw);
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+}
+
+.key{
+
+    height:54px;
+
+    border:none;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,253,248,.96);
+
+    color:#806b50;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 7px 18px
+        rgba(100,80,50,.12);
+
+    cursor:pointer;
+
+    transition:.18s;
+}
+
+.key:active{
+
+    transform:scale(.92);
+
+    background:#eee2ca;
+}
+
+.key.special{
+
+    font-size:14px;
+
+    color:#766b5e;
+}
+
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+.hearts{
+
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:0;
+}
+
+.heart{
+
+    position:absolute;
+
+    width:11px;
+
+    height:11px;
+
+    background:#c8ad82;
+
+    transform:rotate(45deg);
+
+    opacity:.35;
+
+    animation:
+        floatHeart
+        8s linear infinite;
+}
+
+.heart::before,
+.heart::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:11px;
+
+    height:11px;
+
+    background:#c8ad82;
+
+    border-radius:50%;
+}
+
+.heart::before{
+
+    left:-5.5px;
+}
+
+.heart::after{
+
+    top:-5.5px;
+}
+
+
+@keyframes floatHeart{
+
+    0%{
+
+        transform:
+            translateY(110vh)
+            rotate(45deg)
+            scale(.7);
+
+        opacity:0;
+    }
+
+    20%{
+
+        opacity:.4;
+    }
+
+    80%{
+
+        opacity:.3;
+    }
+
+    100%{
+
+        transform:
+            translateY(-20vh)
+            rotate(45deg)
+            scale(1.15);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   PAGE INDICATOR
+===================================================== */
+
+.dots{
+
+    position:fixed;
+
+    right:10px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    z-index:100;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.dot{
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+    background:
+        rgba(128,107,80,.25);
+
+    transition:.3s;
+}
+
+.dot.active{
+
+    height:18px;
+
+    border-radius:10px;
+
+    background:#8b7355;
+}
+
+
+/* =====================================================
+   TYPOGRAPHY
+===================================================== */
+
+.title{
+
+    position:relative;
+
+    z-index:5;
+
+    font-family:Georgia,serif;
+
+    color:#806b50;
+
+    font-size:38px;
+
+    line-height:1.15;
+
+    text-align:center;
+
+    margin-bottom:12px;
+
+    text-shadow:
+        0 3px 10px
+        rgba(128,107,80,.13);
+}
+
+.subtitle{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+
+    font-size:13px;
+
+    line-height:1.7;
+
+    max-width:430px;
+
+    margin-bottom:22px;
+
+    color:#766b5e;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.btn{
+
+    position:relative;
+
+    z-index:50;
+
+    border:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b59a72,
+            #806b50
+        );
+
+    color:#fffdf8;
+
+    padding:13px 27px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(100,80,50,.22);
+
+    transition:.25s;
+}
+
+.btn:active{
+
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   PAGE 1 — SECRET DIARY
+===================================================== */
+
+.book{
+
+    position:relative;
+
+    z-index:5;
+
+    width:280px;
+
+    height:205px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a88e67,
+            #776247
+        );
+
+    box-shadow:
+        0 20px 40px
+        rgba(80,65,40,.25);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fffdf8;
+
+    cursor:pointer;
+
+    transition:.5s;
+}
+
+.book:active{
+
+    transform:scale(.96);
+}
+
+.book-border{
+
+    position:absolute;
+
+    inset:15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.5);
+
+    border-radius:14px;
+}
+
+.book-title{
+
+    font-family:Georgia,serif;
+
+    font-size:22px;
+
+    z-index:2;
+
+    margin-bottom:15px;
+}
+
+.lock{
+
+    font-size:36px;
+
+    z-index:2;
+
+    animation:
+        lockPulse
+        1.8s infinite;
+}
+
+@keyframes lockPulse{
+
+    50%{
+        transform:scale(1.12);
+    }
+
+}
+
+.tap{
+
+    margin-top:12px;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    opacity:.85;
+}
+
+
+/* =====================================================
+   PAGE 2 — LITTLE WISH
+===================================================== */
+
+.wish-page{
+
+    justify-content:center;
+}
+
+
+.bubble-box{
+
+    position:relative;
+
+    z-index:5;
+
+    width:310px;
+
+    height:310px;
+
+    margin-bottom:5px;
+}
+
+
+/* =====================================================
+   WISH BUBBLE
+===================================================== */
+
+.bubble{
+
+    position:absolute;
+
+    padding:
+        13px 18px;
+
+    border-radius:30px;
+
+    background:
+        rgba(255,253,248,.97);
+
+    color:#806b50;
+
+    font-size:12px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(100,80,50,.12);
+
+    border:
+        1px solid
+        rgba(128,107,80,.12);
+
+    cursor:pointer;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+    user-select:none;
+
+    z-index:10;
+}
+
+.bubble:hover{
+
+    transform:scale(1.07);
+
+    background:#fffaf0;
+
+    box-shadow:
+        0 10px 24px
+        rgba(100,80,50,.16);
+}
+
+.bubble:active{
+
+    transform:scale(.94);
+
+    background:#eee2ca;
+}
+
+
+.bubble.selected{
+
+    background:#e5d4b5;
+
+    color:#66533c;
+
+    box-shadow:
+        0 10px 25px
+        rgba(100,80,50,.22);
+
+    transform:scale(1.05);
+}
+
+
+/* =====================================================
+   POSISI BUBBLE
+===================================================== */
+
+.bubble:nth-child(1){
+
+    left:20px;
+
+    top:35px;
+}
+
+.bubble:nth-child(2){
+
+    right:28px;
+
+    top:32px;
+}
+
+.bubble:nth-child(3){
+
+    left:88px;
+
+    top:110px;
+}
+
+.bubble:nth-child(4){
+
+    right:13px;
+
+    top:145px;
+}
+
+
+/* =====================================================
+   WISH POPUP OVERLAY
+===================================================== */
+
+.wish-modal{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99990;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px 20px;
+
+    background:
+        rgba(80,65,45,.42);
+
+    backdrop-filter:
+        blur(5px);
+
+    -webkit-backdrop-filter:
+        blur(5px);
+}
+
+
+.wish-modal.show{
+
+    display:flex;
+
+    animation:
+        modalFade
+        .3s
+        ease;
+}
+
+
+@keyframes modalFade{
+
+    from{
+
+        opacity:0;
+    }
+
+    to{
+
+        opacity:1;
+    }
+
+}
+
+
+/* =====================================================
+   WISH MODAL BOX
+===================================================== */
+
+.wish-modal-box{
+
+    position:relative;
+
+    width:
+        min(430px,92vw);
+
+    max-height:
+        min(78vh,620px);
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf8,
+            #f8f0df
+        );
+
+    border-radius:25px;
+
+    padding:
+        28px 22px 22px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(70,55,35,.28);
+
+    border:
+        1px solid
+        rgba(128,107,80,.16);
+
+    display:flex;
+
+    flex-direction:column;
+
+    animation:
+        wishPop
+        .4s
+        ease;
+}
+
+
+@keyframes wishPop{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.92);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =====================================================
+   MODAL TITLE
+===================================================== */
+
+.wish-modal-title{
+
+    flex-shrink:0;
+
+    text-align:center;
+
+    font-family:Georgia,serif;
+
+    color:#806b50;
+
+    font-size:24px;
+
+    margin-bottom:15px;
+}
+
+
+/* =====================================================
+   MODAL CONTENT
+===================================================== */
+
+.wish-modal-content{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:
+        5px 8px 10px;
+
+    color:#6f6254;
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    font-size:14px;
+
+    line-height:1.8;
+
+    text-align:center;
+
+    white-space:normal;
+
+    word-break:normal;
+
+    overflow-wrap:break-word;
+
+    -webkit-overflow-scrolling:touch;
+
+    scrollbar-width:thin;
+}
+
+
+/* scrollbar */
+
+.wish-modal-content::-webkit-scrollbar{
+
+    width:5px;
+}
+
+.wish-modal-content::-webkit-scrollbar-track{
+
+    background:#eee2ca;
+
+    border-radius:10px;
+}
+
+.wish-modal-content::-webkit-scrollbar-thumb{
+
+    background:#b59a72;
+
+    border-radius:10px;
+}
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.wish-close{
+
+    flex-shrink:0;
+
+    align-self:center;
+
+    margin-top:15px;
+
+    border:none;
+
+    padding:
+        11px 27px;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #b59a72,
+            #806b50
+        );
+
+    color:#fffdf8;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 18px
+        rgba(100,80,50,.18);
+
+    transition:.2s;
+}
+
+.wish-close:active{
+
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   FINAL TITLE
+===================================================== */
+
+.final-title{
+
+    position:relative;
+
+    z-index:5;
+
+    font-family:Georgia,serif;
+
+    color:#806b50;
+
+    font-size:31px;
+
+    line-height:1.25;
+
+    text-align:center;
+
+    margin-bottom:6px;
+}
+
+.small-title{
+
+    position:relative;
+
+    z-index:5;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+
+    color:#a08b6d;
+
+    margin-bottom:15px;
+}
+
+
+/* =====================================================
+   PAGE 3 — PHOTO
+===================================================== */
+
+.photo-page{
+
+    justify-content:center;
+
+    padding-left:0;
+
+    padding-right:0;
+}
+
+.photo-page .title{
+
+    padding:0 20px;
+}
+
+.photo-page .subtitle{
+
+    padding:0 20px;
+
+    margin-bottom:18px;
+}
+
+
+/* =====================================================
+   PHOTO WINDOW
+===================================================== */
+
+.photo-window{
+
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+    z-index:5;
+
+    padding:18px 0 25px;
+}
+
+
+/*
+   PENTING:
+   photo-track sekarang berisi 2 photo-group
+   yang isinya sama persis.
+
+   Group 1:
+   FOTO 1 → FOTO 2 → FOTO 3 → FOTO 4
+
+   Group 2:
+   FOTO 1 → FOTO 2 → FOTO 3 → FOTO 4
+
+   Karena kedua group memiliki ukuran yang sama,
+   translateX(-50%) akan menghasilkan loop
+   yang jauh lebih mulus.
+*/
+
+.photo-track{
+
+    display:flex;
+
+    width:max-content;
+
+    gap:0;
+
+    animation:
+        photoMove
+        28s
+        linear
+        infinite;
+
+    will-change:transform;
+
+    touch-action:pan-y;
+
+    cursor:grab;
+}
+
+.photo-track:active{
+
+    cursor:grabbing;
+}
+
+
+/* =====================================================
+   PHOTO GROUP
+===================================================== */
+
+.photo-group{
+
+    display:flex;
+
+    gap:15px;
+
+    flex-shrink:0;
+}
+
+
+/* =====================================================
+   PHOTO CARD
+===================================================== */
+
+.photo-card{
+
+    width:180px;
+
+    height:245px;
+
+    flex-shrink:0;
+
+    padding:
+        8px 8px 14px;
+
+    background:#fffdf8;
+
+    border-radius:5px;
+
+    box-shadow:
+        0 12px 25px
+        rgba(80,65,40,.18);
+
+    transform:rotate(-2deg);
+
+    user-select:none;
+}
+
+.photo-card:nth-child(even){
+
+    transform:rotate(2.5deg);
+}
+
+.photo-card img{
+
+    width:100%;
+
+    height:205px;
+
+    object-fit:cover;
+
+    display:block;
+
+    pointer-events:none;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+}
+
+.photo-card span{
+
+    display:block;
+
+    text-align:center;
+
+    margin-top:8px;
+
+    font-family:cursive;
+
+    font-size:11px;
+
+    color:#766b5e;
+}
+
+
+/* =====================================================
+   SEAMLESS PHOTO MOVEMENT
+===================================================== */
+
+@keyframes photoMove{
+
+    0%{
+
+        transform:translateX(0);
+    }
+
+    100%{
+
+        /*
+           Bergerak tepat sejauh 1 group.
+
+           Karena group pertama dan kedua
+           identik, ketika animasi kembali ke
+           posisi 0 tidak terlihat loncat.
+        */
+
+        transform:translateX(-50%);
+    }
+
+}
+
+
+/* =====================================================
+   PHOTO BOTTOM
+===================================================== */
+
+.photo-bottom{
+
+    position:relative;
+
+    z-index:5;
+
+    text-align:center;
+
+    margin-top:4px;
+}
+
+.photo-bottom h2{
+
+    font-family:Georgia,serif;
+
+    color:#806b50;
+
+    font-size:25px;
+
+    margin-bottom:5px;
+}
+
+.photo-bottom p{
+
+    color:#a08b6d;
+
+    font-size:11px;
+
+    letter-spacing:1px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .title{
+
+        font-size:30px;
+    }
+
+    .subtitle{
+
+        font-size:12px;
+
+        max-width:330px;
+    }
+
+    .book{
+
+        width:260px;
+
+        height:190px;
+    }
+
+    .bubble-box{
+
+        width:285px;
+
+        height:280px;
+    }
+
+    .wish-modal{
+
+        padding:
+            18px 14px;
+    }
+
+    .wish-modal-box{
+
+        width:94vw;
+
+        max-height:82vh;
+
+        padding:
+            24px 17px 18px;
+
+        border-radius:22px;
+    }
+
+    .wish-modal-title{
+
+        font-size:22px;
+
+        margin-bottom:10px;
+    }
+
+    .wish-modal-content{
+
+        font-size:13px;
+
+        line-height:1.75;
+
+        padding:
+            5px 7px 10px;
+    }
+
+    .wish-close{
+
+        margin-top:10px;
+
+        padding:
+            10px 25px;
+    }
+
+    .photo-card{
+
+        width:165px;
+
+        height:225px;
+    }
+
+    .photo-card img{
+
+        height:188px;
+    }
+
+    .photo-bottom h2{
+
+        font-size:22px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL HEIGHT
+===================================================== */
+
+@media(max-height:650px){
+
+    .title{
+
+        font-size:27px;
+
+        margin-bottom:7px;
+    }
+
+    .subtitle{
+
+        margin-bottom:10px;
+
+        line-height:1.5;
+    }
+
+    .bubble-box{
+
+        transform:scale(.82);
+
+        margin-top:-15px;
+
+        margin-bottom:-25px;
+    }
+
+    .photo-window{
+
+        padding-top:5px;
+
+        padding-bottom:12px;
+    }
+
+    .photo-card{
+
+        height:205px;
+    }
+
+    .photo-card img{
+
+        height:170px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL HEIGHT MODAL
+===================================================== */
+
+@media(max-height:500px){
+
+    .wish-modal-box{
+
+        max-height:88vh;
+    }
+
+    .wish-modal-title{
+
+        font-size:19px;
+
+        margin-bottom:6px;
+    }
+
+    .wish-modal-content{
+
+        font-size:12px;
+
+        line-height:1.6;
+    }
+
+    .wish-close{
+
+        padding:
+            8px 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PASSWORD
+===================================================== -->
+
+<div id="passwordScreen">
+
+    <div class="password-lock">
+        🔐
+    </div>
+
+    <h1 class="password-title">
+        HAII SAYANGG ♡
+    </h1>
+
+    <p class="password-subtitle">
+
+        Masukkan password untuk membuka
+
+        <br>
+
+        sesuatu yang spesial buat kamu.
+
+    </p>
+
+
+    <!-- 4 DIGIT -->
+
+    <div class="password-dots">
+
+        <div class="password-dot"></div>
+
+        <div class="password-dot"></div>
+
+        <div class="password-dot"></div>
+
+        <div class="password-dot"></div>
+
+    </div>
+
+
+    <div
+        class="password-error"
+        id="passwordError">
+    </div>
+
+
+    <div class="keypad">
+
+        <button
+            class="key"
+            onclick="pressKey('1')">
+            1
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('2')">
+            2
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('3')">
+            3
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('4')">
+            4
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('5')">
+            5
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('6')">
+            6
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('7')">
+            7
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('8')">
+            8
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('9')">
+            9
+        </button>
+
+        <button
+            class="key special"
+            onclick="clearPassword()">
+            CLEAR
+        </button>
+
+        <button
+            class="key"
+            onclick="pressKey('0')">
+            0
+        </button>
+
+        <button
+            class="key special"
+            onclick="deletePassword()">
+            ⌫
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MUSIC
+===================================================== -->
+
+<audio
+    id="music"
+    src="music.mp3"
+    loop
+    preload="auto">
+</audio>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<div id="app">
+
+
+    <!-- FLOATING HEARTS -->
+
+    <div class="hearts">
+
+        <div
+            class="heart"
+            style="left:8%;animation-delay:0s">
+        </div>
+
+        <div
+            class="heart"
+            style="left:23%;animation-delay:2s">
+        </div>
+
+        <div
+            class="heart"
+            style="left:42%;animation-delay:4s">
+        </div>
+
+        <div
+            class="heart"
+            style="left:63%;animation-delay:1s">
+        </div>
+
+        <div
+            class="heart"
+            style="left:82%;animation-delay:3s">
+        </div>
+
+    </div>
+
+
+    <!-- PAGE DOTS -->
+
+    <div class="dots">
+
+        <div class="dot active"></div>
+
+        <div class="dot"></div>
+
+        <div class="dot"></div>
+
+    </div>
+
+
+    <!-- =================================================
+         PAGE 1
+    ================================================= -->
+
+    <section
+        class="page active"
+        id="page1">
+
+        <h1 class="title">
+            My Secret Diary
+        </h1>
+
+        <p class="subtitle">
+
+            Ketuk buku untuk memutar
+            <br>
+            kuncinya & membacanya
+
+        </p>
+
+
+        <div
+            class="book"
+            onclick="nextPage()">
+
+            <div class="book-border"></div>
+
+            <div class="book-title">
+                My Secret Diary
+            </div>
+
+            <div class="lock">
+                🔐
+            </div>
+
+            <div class="tap">
+                TAP TO UNLOCK & OPEN
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         PAGE 2 — A LITTLE WISH
+    ================================================= -->
+
+    <section
+        class="page wish-page"
+        id="page2">
+
+        <h1 class="title">
+            A Little Wish ♡
+        </h1>
+
+        <p class="subtitle">
+
+            Pilih salah satu...
+            <br>
+            mungkin ada doa kecil untuk kamu.
+
+        </p>
+
+
+        <div class="bubble-box">
+
+
+            <!-- BERDUA -->
+
+            <div
+                class="bubble"
+                onclick="showWish(
+                    this,
+                    'Berdua',
+                    'Sembilan tahun ternyata bukan perjalanan yang mudah, ya. Aku ingin lebih lama lagi sama kamu, selamanya. mungkin tahun depan kita sudah bertiga, berempat, atau berapa pun nantinya. Semoga kita selalu saling mencintai, terus bertumbuh, dan bertahan. Sampai tak ada lagi kata akhir untuk kita.'
+                )">
+
+                Berdua
+
+            </div>
+
+
+            <!-- BAHAGIA -->
+
+            <div
+                class="bubble"
+                onclick="showWish(
+                    this,
+                    'Bahagia',
+                    'Bahagia rasanya bisa menemani perjalanan hidup kamu. Melihat kamu melewati banyak hal, tersenyum, dan tertawa bersama orang-orang yang kamu sayangi. Ada kebahagiaan tersendiri bagiku saat melihat kamu bahagia. Semoga, di setiap bahagiamu, selalu ada aku. Bukan hanya hari ini, tetapi selamanya.'
+                )">
+
+                Bahagia
+
+            </div>
+
+
+            <!-- KITA -->
+
+            <div
+                class="bubble"
+                onclick="showWish(
+                    this,
+                    'Kita',
+                    'Perjalanan kita tentu tidak selalu dipenuhi hal-hal baik. Ada luka, kecewa, dan rasa sakit yang pernah kita lalui, bahkan mungkin tanpa sengaja kita pernah menjadi alasan kesedihan satu sama lain. Tapi percayalah, semua itu tidak pernah lebih besar dari cinta dan sayang yang aku miliki untukmu. Maaf jika perjalanan kita jauh dari sempurna. Kita hanya dua manusia yang masih belajar mencintai, memahami, dan menerima satu sama lain. Semoga Januari menjadi salah satu babak paling bahagia dalam perjalanan kita. Semoga Allah memudahkan langkah kita menuju satu atap, hingga akhirnya kita tak perlu lagi mengenal arti LDR.'
+                )">
+
+                Kita
+
+            </div>
+
+
+            <!-- PERAYAAN -->
+
+            <div
+                class="bubble"
+                onclick="showWish(
+                    this,
+                    'Perayaan',
+                    'Alhamdulillah, hari ini kamu akan dilantik sebagai Ajun Jaksa Madya. Aku bangga sekali dan bahagia bisa ikut merayakan pencapaian ini bersamamu. Semoga ini menjadi awal dari banyak hal baik dalam perjalanan kariermu. Semoga setiap langkah membawa keberuntungan, setiap usaha menjadi berkah, dan Allah selalu menyertai perjalanan hidupmu. Semoga Allah senantiasa memberikan kebahagiaan, kesehatan, kelancaran rezeki, ketenangan, dan kemudahan dalam segala urusanmu. Tetaplah menjadi pribadi yang amanah dan tidak pernah lupa bersyukur atas setiap pencapaian.'
+                )">
+
+                Perayaan
+
+            </div>
+
+
+        </div>
+
+
+        <h2 class="final-title">
+
+            Happy Birthday,
+            <br>
+            My Love ♥
+
+        </h2>
+
+
+        <div class="small-title">
+            FOREVER & ALWAYS YOURS
+        </div>
+
+
+        <button
+            class="btn"
+            onclick="nextPage()">
+
+            Open Your Memories →
+
+        </button>
+
+    </section>
+
+
+    <!-- =================================================
+         WISH MODAL
+    ================================================= -->
+
+    <div
+        class="wish-modal"
+        id="wishModal">
+
+        <div class="wish-modal-box">
+
+
+            <div
+                class="wish-modal-title"
+                id="wishModalTitle">
+
+                A Little Wish ♡
+
+            </div>
+
+
+            <div
+                class="wish-modal-content"
+                id="wishModalContent">
+
+            </div>
+
+
+            <button
+                class="wish-close"
+                onclick="closeWish()">
+
+                Tutup ♡
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PAGE 3 — MOVING PHOTOS
+    ================================================= -->
+
+    <section
+        class="page photo-page"
+        id="page3">
+
+        <h1 class="title">
+            Our Little Memories ♡
+        </h1>
+
+        <p class="subtitle">
+
+            perjalanan yang indah semoga selalu ada aku
+            di dalamnya.
+
+        </p>
+
+
+        <div class="photo-window">
+
+            <div
+                class="photo-track"
+                id="photoTrack">
+
+
+                <!-- =================================================
+                     SET FOTO 1
+                     FOTO 1 → FOTO 2 → FOTO 3 → FOTO 4
+                ================================================= -->
+
+                <div class="photo-group">
+
+                    <!-- FOTO 1 -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto1.jpg"
+                            alt="Memory 1">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                    <!-- FOTO 2 -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto2.jpg"
+                            alt="Memory 2">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                    <!-- FOTO 3 -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto3.jpg"
+                            alt="Memory 3">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                    <!-- FOTO 4 -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto4.jpg"
+                            alt="Memory 4">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SET FOTO 2
+                     DUPLIKAT DARI SET PERTAMA
+                     AGAR GERAK TERUS TANPA PUTUS
+                ================================================= -->
+
+                <div
+                    class="photo-group"
+                    aria-hidden="true">
+
+
+                    <!-- FOTO 1 DUPLIKAT -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto1.jpg"
+                            alt="">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                    <!-- FOTO 2 DUPLIKAT -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto2.jpg"
+                            alt="">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                    <!-- FOTO 3 DUPLIKAT -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto3.jpg"
+                            alt="">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                    <!-- FOTO 4 DUPLIKAT -->
+
+                    <div class="photo-card">
+
+                        <img
+                            src="foto4.jpg"
+                            alt="">
+
+                        <span>
+                            just us ♡
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="photo-bottom">
+
+            <h2>
+                Happy Birthday, My Love ♡
+            </h2>
+
+            <p>
+                FOREVER & ALWAYS YOURS
+            </p>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   PASSWORD
+===================================================== */
+
+const correctPassword = "0819";
+
+let passwordInput = "";
+
+let isUnlocked = false;
+
+
+const passwordScreen =
+    document.getElementById(
+        "passwordScreen"
+    );
+
+
+const passwordDots =
+    document.querySelectorAll(
+        ".password-dot"
+    );
+
+
+const passwordError =
+    document.getElementById(
+        "passwordError"
+    );
+
+
+/* =====================================================
+   PASSWORD DOT
+===================================================== */
+
+function updatePasswordDots(){
+
+    passwordDots.forEach(
+        (dot,index)=>{
+
+            dot.classList.toggle(
+                "filled",
+                index <
+                passwordInput.length
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PRESS KEY
+===================================================== */
+
+function pressKey(number){
+
+    if(isUnlocked){
+        return;
+    }
+
+
+    if(passwordInput.length >= 4){
+        return;
+    }
+
+
+    passwordInput += number;
+
+
+    passwordError.textContent = "";
+
+
+    updatePasswordDots();
+
+
+    if(passwordInput.length === 4){
+
+        setTimeout(
+            checkPassword,
+            120
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DELETE PASSWORD
+===================================================== */
+
+function deletePassword(){
+
+    if(isUnlocked){
+        return;
+    }
+
+
+    passwordInput =
+        passwordInput.slice(0,-1);
+
+
+    passwordError.textContent = "";
+
+
+    updatePasswordDots();
+
+}
+
+
+/* =====================================================
+   CLEAR PASSWORD
+===================================================== */
+
+function clearPassword(){
+
+    if(isUnlocked){
+        return;
+    }
+
+
+    passwordInput = "";
+
+
+    passwordError.textContent = "";
+
+
+    updatePasswordDots();
+
+}
+
+
+/* =====================================================
+   CHECK PASSWORD
+===================================================== */
+
+function checkPassword(){
+
+    if(
+        passwordInput ===
+        correctPassword
+    ){
+
+        isUnlocked = true;
+
+
+        passwordError.style.color =
+            "#806b50";
+
+
+        passwordError.textContent =
+            "Berhasil dibuka ♡";
+
+
+        passwordScreen.classList.add(
+            "hide"
+        );
+
+
+        startMusic();
+
+
+        setTimeout(
+            ()=>{
+                passwordScreen.remove();
+            },
+            500
+        );
+
+    }
+
+    else{
+
+        passwordError.style.color =
+            "#9a6858";
+
+
+        passwordError.textContent =
+            "Password salah. Coba lagi ♡";
+
+
+        passwordInput = "";
+
+
+        updatePasswordDots();
+
+    }
+
+}
+
+
+/* =====================================================
+   KEYBOARD
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(isUnlocked){
+            return;
+        }
+
+
+        if(
+            event.key >= "0" &&
+            event.key <= "9"
+        ){
+
+            pressKey(
+                event.key
+            );
+
+        }
+
+
+        else if(
+            event.key === "Backspace"
+        ){
+
+            deletePassword();
+
+        }
+
+
+        else if(
+            event.key === "Escape"
+        ){
+
+            clearPassword();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+let currentPage = 1;
+
+
+const pages =
+    document.querySelectorAll(
+        ".page"
+    );
+
+
+const dots =
+    document.querySelectorAll(
+        ".dot"
+    );
+
+
+function showPage(number){
+
+    if(!isUnlocked){
+        return;
+    }
+
+
+    if(number < 1){
+        number = 1;
+    }
+
+
+    if(number > pages.length){
+        number = pages.length;
+    }
+
+
+    currentPage = number;
+
+
+    pages.forEach(
+        (page,index)=>{
+
+            page.classList.toggle(
+                "active",
+                index === number - 1
+            );
+
+        }
+    );
+
+
+    dots.forEach(
+        (dot,index)=>{
+
+            dot.classList.toggle(
+                "active",
+                index === number - 1
+            );
+
+        }
+    );
+
+
+    startMusic();
+
+}
+
+
+function nextPage(){
+
+    if(!isUnlocked){
+        return;
+    }
+
+
+    if(
+        currentPage <
+        pages.length
+    ){
+
+        showPage(
+            currentPage + 1
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MUSIC
+===================================================== */
+
+const music =
+    document.getElementById(
+        "music"
+    );
+
+
+let musicStarted = false;
+
+
+function startMusic(){
+
+    if(musicStarted){
+        return;
+    }
+
+
+    music.volume = .45;
+
+
+    const playPromise =
+        music.play();
+
+
+    if(
+        playPromise !== undefined
+    ){
+
+        playPromise
+            .then(
+                ()=>{
+                    musicStarted = true;
+                }
+            )
+            .catch(
+                ()=>{
+                    musicStarted = false;
+                }
+            );
+
+    }
+
+}
+
+
+/* =====================================================
+   LITTLE WISH
+===================================================== */
+
+const wishModal =
+    document.getElementById(
+        "wishModal"
+    );
+
+
+const wishModalTitle =
+    document.getElementById(
+        "wishModalTitle"
+    );
+
+
+const wishModalContent =
+    document.getElementById(
+        "wishModalContent"
+    );
+
+
+function showWish(
+    element,
+    title,
+    text
+){
+
+    document
+        .querySelectorAll(
+            ".bubble"
+        )
+        .forEach(
+            bubble=>{
+
+                bubble.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
+
+    element.classList.add(
+        "selected"
+    );
+
+
+    wishModalTitle.textContent =
+        title + " ♡";
+
+
+    wishModalContent.textContent =
+        text;
+
+
+    wishModalContent.scrollTop = 0;
+
+
+    wishModal.classList.add(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    createWishParticles();
+
+}
+
+
+/* =====================================================
+   CLOSE WISH
+===================================================== */
+
+function closeWish(){
+
+    wishModal.classList.remove(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =====================================================
+   CLICK BACKGROUND TO CLOSE
+===================================================== */
+
+wishModal.addEventListener(
+    "click",
+    event=>{
+
+        if(
+            event.target ===
+            wishModal
+        ){
+
+            closeWish();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESCAPE TO CLOSE
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(
+            event.key === "Escape" &&
+            wishModal.classList.contains(
+                "show"
+            )
+        ){
+
+            closeWish();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   WISH PARTICLES
+===================================================== */
+
+function createWishParticles(){
+
+    for(
+        let i = 0;
+        i < 18;
+        i++
+    ){
+
+        const particle =
+            document.createElement(
+                "div"
+            );
+
+
+        particle.innerHTML =
+            Math.random() > .5
+            ? "♥"
+            : "✿";
+
+
+        particle.style.position =
+            "fixed";
+
+
+        particle.style.left =
+            "50%";
+
+
+        particle.style.top =
+            "45%";
+
+
+        particle.style.zIndex =
+            "99999";
+
+
+        particle.style.fontSize =
+            (
+                12 +
+                Math.random() * 15
+            ) + "px";
+
+
+        particle.style.color =
+            "#a88e67";
+
+
+        document.body.appendChild(
+            particle
+        );
+
+
+        const x =
+            (
+                Math.random() -
+                .5
+            ) * 350;
+
+
+        const y =
+            (
+                Math.random() -
+                .5
+            ) * 300;
+
+
+        particle.animate(
+
+            [
+
+                {
+                    transform:
+                        "translate(0,0) scale(.5)",
+
+                    opacity:1
+                },
+
+                {
+
+                    transform:
+                        `
+                        translate(
+                            ${x}px,
+                            ${y}px
+                        )
+                        scale(1.4)
+                        `,
+
+                    opacity:0
+                }
+
+            ],
+
+            {
+                duration:900
+            }
+
+        );
+
+
+        setTimeout(
+            ()=>{
+                particle.remove();
+            },
+            1000
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE SWIPE
+===================================================== */
+
+let touchStartX = 0;
+
+let touchStartY = 0;
+
+
+document.addEventListener(
+    "touchstart",
+    event=>{
+
+        if(!isUnlocked){
+            return;
+        }
+
+
+        if(
+            wishModal.classList.contains(
+                "show"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            event.target.closest(
+                ".photo-track"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            event.touches.length === 1
+        ){
+
+            touchStartX =
+                event.touches[0]
+                    .clientX;
+
+
+            touchStartY =
+                event.touches[0]
+                    .clientY;
+
+        }
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+document.addEventListener(
+    "touchend",
+    event=>{
+
+        if(!isUnlocked){
+            return;
+        }
+
+
+        if(
+            wishModal.classList.contains(
+                "show"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            event.target.closest(
+                ".photo-track"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        const touchEndX =
+            event.changedTouches[0]
+                .clientX;
+
+
+        const touchEndY =
+            event.changedTouches[0]
+                .clientY;
+
+
+        const distanceX =
+            touchEndX -
+            touchStartX;
+
+
+        const distanceY =
+            touchEndY -
+            touchStartY;
+
+
+        if(
+            Math.abs(distanceX) > 80 &&
+            Math.abs(distanceX) >
+            Math.abs(distanceY)
+        ){
+
+            if(distanceX < 0){
+
+                nextPage();
+
+            }
+
+            else{
+
+                showPage(
+                    currentPage - 1
+                );
+
+            }
+
+        }
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =====================================================
+   PHOTO TRACK
+===================================================== */
+
+const photoTrack =
+    document.getElementById(
+        "photoTrack"
+    );
+
+
+let photoStartX = 0;
+
+let photoCurrentX = 0;
+
+let photoDragging = false;
+
+let photoMoved = false;
+
+
+/* =====================================================
+   PHOTO POINTER DOWN
+===================================================== */
+
+photoTrack.addEventListener(
+    "pointerdown",
+    event=>{
+
+        photoDragging = true;
+
+        photoMoved = false;
+
+
+        photoStartX =
+            event.clientX;
+
+
+        photoCurrentX =
+            event.clientX;
+
+
+        photoTrack.style.animationPlayState =
+            "paused";
+
+
+        photoTrack.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PHOTO POINTER MOVE
+===================================================== */
+
+photoTrack.addEventListener(
+    "pointermove",
+    event=>{
+
+        if(!photoDragging){
+            return;
+        }
+
+
+        photoCurrentX =
+            event.clientX;
+
+
+        const distance =
+            photoCurrentX -
+            photoStartX;
+
+
+        if(
+            Math.abs(distance) > 5
+        ){
+
+            photoMoved = true;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PHOTO POINTER UP
+===================================================== */
+
+photoTrack.addEventListener(
+    "pointerup",
+    ()=>{
+
+        photoDragging = false;
+
+
+        setTimeout(
+            ()=>{
+
+                photoTrack.style.animationPlayState =
+                    "running";
+
+            },
+            300
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PHOTO POINTER CANCEL
+===================================================== */
+
+photoTrack.addEventListener(
+    "pointercancel",
+    ()=>{
+
+        photoDragging = false;
+
+        photoTrack.style.animationPlayState =
+            "running";
+
+    }
+);
+
+
+/* =====================================================
+   PREVENT DOUBLE TAP ZOOM
+===================================================== */
+
+let lastTouchEnd = 0;
+
+
+document.addEventListener(
+    "touchend",
+    event=>{
+
+        const now =
+            Date.now();
+
+
+        if(
+            now -
+            lastTouchEnd <=
+            300
+        ){
+
+            event.preventDefault();
+
+        }
+
+
+        lastTouchEnd =
+            now;
+
+    },
+    {
+        passive:false
+    }
+);
+
+</script>
+
+</body>
+
+</html>
